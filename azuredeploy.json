@@ -50,11 +50,7 @@
   "outputs": {
     "test-output": {
       "type": "string",
-      "value": "[subscription().subscriptionId]"
-    },
-    "test-output2": {
-      "type": "string",
-      "value": "[uniqueString(subscription().subscriptionId)]"
+      "value": "[variables('storageAccountName')]"
     }
   }
 }

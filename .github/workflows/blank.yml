@@ -27,11 +27,13 @@ jobs:
         
       - name: Deploy Azure Resource Manager (ARM) Template
         uses: Azure/arm-deploy@v1
+        id: armdeploy
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: szkchmzad2
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json
-          deploymentMode: Validate
-          
+          deploymentMode: Complete  # Validate
       
+      - name: ARM output
+        run: echo ${{ steps.armdeploy.outputs.test-output }}
