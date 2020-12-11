@@ -34,7 +34,7 @@ jobs:
           resourceGroupName: szkchmzad2
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json
-          deploymentMode: Validate #Complete  # Validate
+          deploymentMode: Complete #Complete  # Validate
       
       - name: ARM output
         run: |
