@@ -45,6 +45,16 @@ jobs:
           parameters: azuredeploy.parameters.json
           deploymentMode: Complete
 
+      - name: Dump steps context ARMValidate
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps.ARMValidate) }}
+        run: echo "$STEPS_CONTEXT"
+
+      - name: Dump steps context ARMDeploy
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps.ARMDeploy) }}
+        run: echo "$STEPS_CONTEXT"
+
       - name: ARM output
         run: |
           echo ${{ steps.ARMDeploy.outputs.testoutput }}
