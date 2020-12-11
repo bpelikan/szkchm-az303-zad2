@@ -1,8 +1,9 @@
-name: CI
+name: ARM template deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - '*'
   pull_request:
     branches: [ main ]
 
@@ -33,7 +34,8 @@ jobs:
           resourceGroupName: szkchmzad2
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json
-          deploymentMode: Complete  # Validate
+          deploymentMode: Validate #Complete  # Validate
       
       - name: ARM output
-        run: echo ${{ steps.armdeploy.outputs.test-output }}
+        run: |
+          echo ${{ steps.armdeploy.outputs.testoutput }}

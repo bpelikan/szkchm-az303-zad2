@@ -48,7 +48,7 @@
       }
   ],
   "outputs": {
-    "test-output": {
+    "testoutput": {
       "type": "string",
       "value": "[variables('storageAccountName')]"
     }
