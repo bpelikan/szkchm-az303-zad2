@@ -5,9 +5,6 @@
       "location": {
           "type": "string"
       },
-      // "storageAccountName": {
-      //     "type": "string"
-      // },
       "accountType": {
           "type": "string"
       },
