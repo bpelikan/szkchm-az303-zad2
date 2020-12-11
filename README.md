@@ -1,0 +1,1 @@
+# szkchm-az303-zad2
