@@ -33,7 +33,7 @@ jobs:
           deploymentMode: Validate
 
       - name: Deploy Azure Resource Manager (ARM) Template
-        if: github.ref == 'refs/heads/main'
+        # if: github.ref == 'refs/heads/main'
         uses: Azure/arm-deploy@v1
         id: ARMDeploy
         with:
