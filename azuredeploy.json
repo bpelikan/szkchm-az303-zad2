@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
+  "contentVersion": "1.0.0.4",
   "parameters": {
       "location": {
           "type": "string"
@@ -40,14 +40,14 @@
         "mode": "Incremental",
         "templateLink": {
           "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
-          "contentVersion":"1.0.0.0"
+          "contentVersion":"1.0.0.4"
         },
         "parameters": {
             "virtualNetworkName":{
               "value": "[parameters('virtualNetworkName')]"
             },
             "subnetsCount":{
-              "value": 6
+              "value": 2
             }
           }
       }
