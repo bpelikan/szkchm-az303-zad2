@@ -1,0 +1,83 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "location": {
+          "type": "string",
+          "defaultValue": "westeurope"
+      },
+      "virtualNetworkName": {
+          "type": "string"
+      },
+      "resourceGroup": {
+          "type": "string"
+      },
+      "addressSpaces": {
+          "type": "array"
+      },
+      "ipv6Enabled": {
+          "type": "bool"
+      },
+      "subnetCount": {
+          "type": "int"
+      },
+      "subnet0_name": {
+          "type": "string"
+      },
+      "subnet0_addressRange": {
+          "type": "string"
+      },
+      "subnet1_name": {
+          "type": "string"
+      },
+      "subnet1_addressRange": {
+          "type": "string"
+      },
+      "ddosProtectionPlanEnabled": {
+          "type": "bool",
+          "defaultValue": false
+      },
+      "firewallEnabled": {
+          "type": "bool"
+      },
+      "bastionEnabled": {
+          "type": "bool"
+      }
+  },
+  "variables": {
+    "subnet0_name": "[concat(parameters('virtualNetworkName'), '-sub0')]",
+    "subnet1_name": "[concat(parameters('virtualNetworkName'), '-sub1')]"
+  },
+  "resources": [
+      {
+          "name": "[parameters('virtualNetworkName')]",
+          "type": "Microsoft.Network/VirtualNetworks",
+          "apiVersion": "2019-09-01",
+          "location": "[parameters('location')]",
+          "dependsOn": [],
+          "tags": {},
+          "properties": {
+              "addressSpace": {
+                  "addressPrefixes": [
+                      "10.0.0.0/16"
+                  ]
+              },
+              "subnets": [
+                  {
+                      "name": "[variables('subnet0_name')]",
+                      "properties": {
+                          "addressPrefix": "10.0.0.0/24"
+                      }
+                  },
+                  {
+                      "name": "[variables('subnet1_name')]",
+                      "properties": {
+                          "addressPrefix": "10.0.1.0/24"
+                      }
+                  }
+              ],
+              "enableDdosProtection": "[parameters('ddosProtectionPlanEnabled')]"
+          }
+      }
+  ]
+}
