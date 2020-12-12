@@ -8,7 +8,7 @@
       "virtualNetworkName": {
           "value": "cl1-prod-szkchm-ne-vnet"
       },
-      "subnetCount": {
+      "subnetsCount": {
           "value": 2
       }
   }

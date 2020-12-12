@@ -14,27 +14,11 @@
           "type": "string",
           "defaultValue": "10.0.0.0/16"
       },
-      "subnetCount": {
+      "subnetsCount": {
           "type": "int",
           "defaultValue": 2,
           "minValue": 1,
           "maxValue": 10
-      },
-      "subnet0_name": {
-          "type": "string",
-          "defaultValue": "[concat(parameters('virtualNetworkName'), '-sub0')]"
-      },
-      "subnet0_addressRange": {
-          "type": "string",
-          "defaultValue": "10.0.0.0/24"
-      },
-      "subnet1_name": {
-          "type": "string",
-          "defaultValue": "[concat(parameters('virtualNetworkName'), '-sub1')]"
-      },
-      "subnet1_addressRange": {
-          "type": "string",
-          "defaultValue": "10.0.1.0/24"
       },
       "ddosProtectionPlanEnabled": {
           "type": "bool",
@@ -68,8 +52,8 @@
               "addressPrefix": "[concat('10.0.', copyIndex(0), '.0/24')]"
           },
           "copy": {
-                "name": "subnetCount",
-                "count": "[parameters('subnetCount')]",
+                "name": "subnetsCountCopy",
+                "count": "[parameters('subnetsCount')]",
                 "mode": "Serial",
                 "batchSize": 1
           },

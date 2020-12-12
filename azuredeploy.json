@@ -40,16 +40,16 @@
         "mode": "Incremental",
         "templateLink": {
           "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
-          "contentVersion":"1.0.0.0",
-          "parameters": {
+          "contentVersion":"1.0.0.0"
+        },
+        "parameters": {
             "virtualNetworkName":{
               "value": "[parameters('virtualNetworkName')]"
             },
-            "subnetCount":{
-              "value": 4
+            "subnetsCount":{
+              "value": 6
             }
           }
-        }
       }
     },
     {
