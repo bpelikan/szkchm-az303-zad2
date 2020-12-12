@@ -42,16 +42,21 @@
           "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
           "contentVersion":"1.0.0.0",
           "parameters": {
-            "virtualNetworkName":{"value": "[parameters('virtualNetworkName')]"}
+            "virtualNetworkName":{
+              "value": "[parameters('virtualNetworkName')]"}
           }
         }
       }
     },
     {
-        "name": "[variables('storageAccountName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
+        "name": "[variables('storageAccountName')]",
         "location": "[parameters('location')]",
+        "comments": "Comments test 1",
+        "metadata" : {
+          "comments": "Comments test 2"
+        },
         "properties": {
             "accessTier": "[parameters('accessTier')]",
             "minimumTlsVersion": "[parameters('minimumTlsVersion')]",

@@ -22,6 +22,9 @@
         },
         "allowBlobPublicAccess": {
             "value": true
+        },
+        "virtualNetworkName": {
+            "value": "cl1-prod-szkchm-ne-vnet"
         }
     }
 }
