@@ -22,6 +22,10 @@
       },
       "allowBlobPublicAccess": {
           "type": "bool"
+      },
+      "virtualNetworkName": {
+          "type": "string",
+          "defaultValue": "vnet"
       }
   },
   "variables": {
@@ -29,23 +33,38 @@
   },
   "resources": [
       {
-          "name": "[variables('storageAccountName')]",
-          "type": "Microsoft.Storage/storageAccounts",
-          "apiVersion": "2019-06-01",
-          "location": "[parameters('location')]",
-          "properties": {
-              "accessTier": "[parameters('accessTier')]",
-              "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
-              "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
-              "allowBlobPublicAccess": "[parameters('allowBlobPublicAccess')]"
-          },
-          "dependsOn": [],
-          "sku": {
-              "name": "[parameters('accountType')]"
-          },
-          "kind": "[parameters('kind')]",
-          "tags": {}
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "vnet",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
+          "contentVersion":"1.0.0.0",
+          "parameters": {
+            "virtualNetworkName":{"value": "[parameters('virtualNetworkName')]"}
+          }
+        }
       }
+    },
+    {
+        "name": "[variables('storageAccountName')]",
+        "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2019-06-01",
+        "location": "[parameters('location')]",
+        "properties": {
+            "accessTier": "[parameters('accessTier')]",
+            "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
+            "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
+            "allowBlobPublicAccess": "[parameters('allowBlobPublicAccess')]"
+        },
+        "dependsOn": [],
+        "sku": {
+            "name": "[parameters('accountType')]"
+        },
+        "kind": "[parameters('kind')]",
+        "tags": {}
+    }
   ],
   "outputs": {
     "testoutput": {

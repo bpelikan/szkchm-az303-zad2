@@ -3,7 +3,8 @@ name: ARM template deploy
 on:
   push:
     branches: 
-      - '*'
+      - main
+      - vnet
   pull_request:
     branches: [ main ]
 

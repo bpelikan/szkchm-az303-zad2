@@ -2,6 +2,8 @@
 
 ![ARM template deploy](https://github.com/bpelikan/szkchm-az303-zad2/workflows/ARM%20template%20deploy/badge.svg)
 
+
+## GGitHub Actions configuration
 ```bash
 # repo settings -> secrets -> create secrets AZURE_SUBSCRIPTION_ID with value from `echo $SUBSCRIPTION_ID`
 SUBSCRIPTION_ID=$(az account show -o json | jq -r ".id")
