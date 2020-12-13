@@ -4,13 +4,7 @@
   "parameters": {
       "virtualNetworkName": {
           "type": "string",
-          "defaultValue": "vnet"
-      },
-      "subnetsCount": {
-          "type": "int",
-          "defaultValue": 2,
-          "minValue": 1,
-          "maxValue": 10
+          "defaultValue": "vnetName"
       },
       "ddosProtectionPlanEnabled": {
           "type": "bool",

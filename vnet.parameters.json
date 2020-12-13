@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.6",
   "parameters": {
       "virtualNetworkName": {
-          "value": "vnet"
+          "value": "vnetName"
       },
       "subnetsCount": {
         "value": 2
