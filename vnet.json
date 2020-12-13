@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.4",
+  "contentVersion": "1.0.0.5",
   "parameters": {
       "location": {
           "type": "string",
@@ -12,7 +12,10 @@
       },
       "addressSpaces": {
           "type": "string",
-          "defaultValue": "10.0.0.0/16"
+          "defaultValue": "10.0.0.0/16",
+          "allowedValues": [
+              "10.0.0.0/16"
+          ]
       },
       "subnetsCount": {
           "type": "int",
