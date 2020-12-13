@@ -2,10 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.6",
   "parameters": {
-      "location": {
-          "type": "string",
-          "defaultValue": "westeurope"
-      },
       "virtualNetworkName": {
           "type": "string",
           "defaultValue": "vnet"
@@ -35,7 +31,6 @@
           "apiVersion": "2019-09-01",
           "name": "[parameters('virtualNetworkName')]",
           "location": "[resourceGroup().location]",
-          "dependsOn": [],
           "tags": {},
           "properties": {
               "addressSpace": {
@@ -47,8 +42,11 @@
           }
       },
       {
-          "apiVersion": "2019-09-01",
           "type": "Microsoft.Network/virtualNetworks/subnets",
+          "apiVersion": "2019-09-01",
+          "dependsOn": [
+              "[parameters('virtualNetworkName')]"
+          ],
           "name": "[concat(parameters('virtualNetworkName'),'/',parameters('virtualNetworkName'), '-sub', copyIndex(0))]",
           "location": "[resourceGroup().location]",
           "properties": {
@@ -56,13 +54,8 @@
           },
           "copy": {
                 "name": "subnetsCountCopy",
-                "count": "[parameters('subnetsCount')]",
-                "mode": "Serial",
-                "batchSize": 1
-          },
-          "dependsOn": [
-                "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
-          ]
+                "count": "[parameters('subnetsCount')]"
+          }
       }
   ]
 }

@@ -41,7 +41,7 @@ jobs:
           resourceGroupName: szkchmzad2
           template: azuredeploy.json
           parameters: ${{ secrets.AZURE_ARM_PARAM_FILE }} # azuredeploy.parameters.json
-          deploymentMode: Complete
+          deploymentMode: Incremental
 
       - name: Deploy ARM output
         if: steps.ARMDeploy.outcome == 'success' 
