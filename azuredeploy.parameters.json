@@ -2,11 +2,17 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.5",
     "parameters": {
-        "location": {
-            "value": "westeurope"
-        },
         "virtualNetworkName": {
             "value": "cl1-prod-szkchm-we-vnet"
+        },
+        "virtualMachineName": {
+            "value": "cl1-prod-szkchm-we-ubuntu-vm1"
+        },
+        "adminUsername": {
+            "value": ""
+        },
+        "adminPassword": {
+            "value": ""
         }
     }
 }

@@ -2,12 +2,25 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.5",
   "parameters": {
-      "location": {
-          "type": "string"
-      },
       "virtualNetworkName": {
           "type": "string",
           "defaultValue": "vnet"
+      },
+      "virtualMachineName": {
+          "type": "string"
+      },
+      "adminUsername": {
+          "type": "secureString"
+      },
+      "adminPassword": {
+          "type": "secureString"
+      },
+
+
+
+      "location": {
+          "type": "string",
+          "defaultValue": "westeurope"
       },
       "accountType": {
           "type": "string",
@@ -54,6 +67,29 @@
             },
             "subnetsCount":{
               "value": 2
+            }
+          }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "vm",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
+          "contentVersion":"1.0.0.5"
+        },
+        "parameters": {
+            "virtualMachineName":{
+              "value": "[parameters('virtualMachineName')]"
+            },
+            "adminUsername":{
+              "value": "[parameters('adminUsername')]"
+            },
+            "adminPassword":{
+              "value": "[parameters('adminPassword')]"
             }
           }
       }

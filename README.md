@@ -5,10 +5,10 @@
 
 ## GitHub Actions configuration
 ```bash
-# repo settings -> secrets -> create secrets AZURE_SUBSCRIPTION_ID with value from `echo $SUBSCRIPTION_ID`
+# settings -> secrets -> create secret AZURE_SUBSCRIPTION_ID with value from $SUBSCRIPTION_ID
 SUBSCRIPTION_ID=$(az account show -o json | jq -r ".id")
 
-# save json from output and save in repo secret AZURE_CREDENTIALS
+# save json from output and save in secret AZURE_CREDENTIALS
 az ad sp create-for-rbac --name "szkchm-az303-zad2" --role contributor \
                           --scopes /subscriptions/$SUBSCRIPTION_ID \
                           --sdk-auth
