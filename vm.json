@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.6",
+  "contentVersion": "1.0.0.7",
   "parameters": {
       "virtualMachineName": {
           "type": "string",
@@ -33,6 +33,9 @@
       },
       "virtualNetworkName": {
           "type": "string"
+      },
+      "vmSubnet": {
+          "type": "string"
       }
   },
   "variables": {
@@ -41,8 +44,7 @@
       "publicIpAddressName": "[concat(parameters('virtualMachineName'), '-pip')]",
       "vnetId":  "[concat(subscription().id, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
       "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
-      "subnetName": "[concat(parameters('virtualNetworkName'), '-sub0')]",
-      "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
+      "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('vmSubnet'))]"
   },
   "resources": [
       {

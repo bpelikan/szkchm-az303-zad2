@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.6",
+  "contentVersion": "1.0.0.7",
   "parameters": {
       "virtualNetworkName": {
           "type": "string",
@@ -15,8 +15,8 @@
       "addressSpaces": "10.0.0.0/16",
       "addressPrefixSub0": "10.0.0.0/24",
       "addressPrefixSub1": "10.0.1.0/24",
-      "subnet0Name": "[concat(parameters('virtualNetworkName'), '-sub0')]",
-      "subnet1Name": "[concat(parameters('virtualNetworkName'), '-sub1')]"
+      "subnetName0": "[concat(parameters('virtualNetworkName'), '-sub0')]",
+      "subnetName1": "[concat(parameters('virtualNetworkName'), '-sub1')]"
   },
   "resources": [
       {
@@ -33,13 +33,13 @@
               },
               "subnets": [
                     {
-                        "name": "[variables('subnet0Name')]",
+                        "name": "[variables('subnetName0')]",
                         "properties": {
                             "addressPrefix": "[variables('addressPrefixSub0')]"
                         }
                     },
                     {
-                        "name": "[variables('subnet1Name')]",
+                        "name": "[variables('subnetName1')]",
                         "properties": {
                             "addressPrefix": "[variables('addressPrefixSub1')]"
                         }
