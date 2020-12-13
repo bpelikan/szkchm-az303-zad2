@@ -6,13 +6,6 @@
           "type": "string",
           "defaultValue": "vnet"
       },
-      "addressSpaces": {
-          "type": "string",
-          "defaultValue": "10.0.0.0/16",
-          "allowedValues": [
-              "10.0.0.0/16"
-          ]
-      },
       "subnetsCount": {
           "type": "int",
           "defaultValue": 2,
@@ -24,7 +17,13 @@
           "defaultValue": false
       }
   },
-  "variables": {},
+  "variables": {
+      "addressSpaces": "10.0.0.0/16",
+      "addressPrefixSub0": "10.0.0.0/24",
+      "addressPrefixSub1": "10.0.1.0/24",
+      "subnet0Name": "[concat(parameters('virtualNetworkName'), '-sub0')]",
+      "subnet1Name": "[concat(parameters('virtualNetworkName'), '-sub1')]"
+  },
   "resources": [
       {
           "type": "Microsoft.Network/VirtualNetworks",
@@ -35,34 +34,24 @@
           "properties": {
               "addressSpace": {
                   "addressPrefixes": [
-                      "[parameters('addressSpaces')]"
+                      "[variables('addressSpaces')]"
                   ]
               },
+              "subnets": [
+                    {
+                        "name": "[variables('subnet0Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('addressPrefixSub0')]"
+                        }
+                    },
+                    {
+                        "name": "[variables('subnet1Name')]",
+                        "properties": {
+                            "addressPrefix": "[variables('addressPrefixSub1')]"
+                        }
+                    }
+                ],
               "enableDdosProtection": "[parameters('ddosProtectionPlanEnabled')]"
-          }
-      },
-      {
-          "type": "Microsoft.Network/virtualNetworks/subnets",
-          "apiVersion": "2019-09-01",
-          "dependsOn": [
-              "[parameters('virtualNetworkName')]"
-          ],
-          "name": "[concat(parameters('virtualNetworkName'),'/',parameters('virtualNetworkName'), '-sub0')]",
-          "location": "[resourceGroup().location]",
-          "properties": {
-              "addressPrefix": "10.0.0.0/24"
-          }
-      },
-      {
-          "type": "Microsoft.Network/virtualNetworks/subnets",
-          "apiVersion": "2019-09-01",
-          "dependsOn": [
-              "[parameters('virtualNetworkName')]"
-          ],
-          "name": "[concat(parameters('virtualNetworkName'),'/',parameters('virtualNetworkName'), '-sub1')]",
-          "location": "[resourceGroup().location]",
-          "properties": {
-              "addressPrefix": "10.0.1.0/24"
           }
       }
   ]
