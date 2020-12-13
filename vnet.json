@@ -47,14 +47,22 @@
           "dependsOn": [
               "[parameters('virtualNetworkName')]"
           ],
-          "name": "[concat(parameters('virtualNetworkName'),'/',parameters('virtualNetworkName'), '-sub', copyIndex(0))]",
+          "name": "[concat(parameters('virtualNetworkName'),'/',parameters('virtualNetworkName'), '-sub0')]",
           "location": "[resourceGroup().location]",
           "properties": {
-              "addressPrefix": "[concat('10.0.', copyIndex(0), '.0/24')]"
-          },
-          "copy": {
-                "name": "subnetsCountCopy",
-                "count": "[parameters('subnetsCount')]"
+              "addressPrefix": "10.0.0.0/24"
+          }
+      },
+      {
+          "type": "Microsoft.Network/virtualNetworks/subnets",
+          "apiVersion": "2019-09-01",
+          "dependsOn": [
+              "[parameters('virtualNetworkName')]"
+          ],
+          "name": "[concat(parameters('virtualNetworkName'),'/',parameters('virtualNetworkName'), '-sub1')]",
+          "location": "[resourceGroup().location]",
+          "properties": {
+              "addressPrefix": "10.0.1.0/24"
           }
       }
   ]
