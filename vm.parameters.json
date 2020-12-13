@@ -1,12 +1,15 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.5",
+  "contentVersion": "1.0.0.6",
   "parameters": {
-      "networkInterfaceName": {
-          "value": "cl1-prod-szkchm-we-u739"
+      "adminUsername": {
+        "value": ""
       },
-      "networkSecurityGroupName": {
-          "value": "cl1-prod-szkchm-we-ubuntu-vm1-nsg"
+      "adminPassword": {
+          "value": ""
+      },
+      "virtualNetworkName": {
+          "value": "vnet"
       },
       "networkSecurityGroupRules": {
           "value": [
@@ -24,27 +27,6 @@
                   }
               }
           ]
-      },
-      "subnetName": {
-          "value": "cl1-prod-szkchm-we-vnet-sub0"
-      },
-      "virtualNetworkId": {
-          "value": "/subscriptions/24eafb4c-3855-419f-adbb-cc08869b1754/resourceGroups/szkchmzad2/providers/Microsoft.Network/virtualNetworks/cl1-prod-szkchm-we-vnet"
-      },
-      "publicIpAddressName": {
-          "value": "cl1-prod-szkchm-we-ubuntu-vm1-ip"
-      },
-      "virtualMachineName": {
-          "value": "vm"
-      },
-      "virtualMachineComputerName": {
-          "value": "cl1-prod-szkchm-we-ubuntu-vm1"
-      },
-      "adminUsername": {
-          "value": null
-      },
-      "adminPassword": {
-          "value": null
       }
   }
 }
