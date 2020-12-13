@@ -17,30 +17,6 @@
       },
       "networkSecurityGroupRules": {
           "type": "array"
-      },
-      "accountType": {
-          "type": "string",
-          "defaultValue": "Standard_LRS"
-      },
-      "kind": {
-          "type": "string",
-          "defaultValue": "StorageV2"
-      },
-      "accessTier": {
-          "type": "string",
-          "defaultValue": "Hot"
-      },
-      "minimumTlsVersion": {
-          "type": "string",
-          "defaultValue": "TLS1_2"
-      },
-      "supportsHttpsTrafficOnly": {
-          "type": "bool",
-          "defaultValue": true
-      },
-      "allowBlobPublicAccess": {
-          "type": "bool",
-          "defaultValue": true
       }
   },
   "variables": {
@@ -54,7 +30,7 @@
       {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
-      "name": "vnet-deployment",
+      "name": "azuredeploy-vnet",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -71,8 +47,8 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
-      "dependsOn": ["vnet-deployment"],
-      "name": "vm0-deployment",
+      "dependsOn": ["azuredeploy-vnet"],
+      "name": "azuredeploy-vm0",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -104,8 +80,8 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
-      "dependsOn": ["vnet-deployment"],
-      "name": "vm1-deployment",
+      "dependsOn": ["azuredeploy-vnet"],
+      "name": "azuredeploy-vm1",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -133,28 +109,6 @@
             }
           }
       }
-    },
-    {
-        "type": "Microsoft.Storage/storageAccounts",
-        "apiVersion": "2019-06-01",
-        "name": "[variables('storageAccountName')]",
-        "location": "[resourceGroup().location]",
-        "comments": "Comments test 1",
-        "metadata" : {
-          "comments": "Comments test 2"
-        },
-        "properties": {
-            "accessTier": "[parameters('accessTier')]",
-            "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
-            "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
-            "allowBlobPublicAccess": "[parameters('allowBlobPublicAccess')]"
-        },
-        "dependsOn": [],
-        "sku": {
-            "name": "[parameters('accountType')]"
-        },
-        "kind": "[parameters('kind')]",
-        "tags": {}
     }
   ],
   "outputs": {
