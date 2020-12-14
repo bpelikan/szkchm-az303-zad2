@@ -1,12 +1,12 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.8",
+    "contentVersion": "1.0.0.9",
     "parameters": {
         "vaultResourceGroupName": {
-            "value": "mykv"
+            "value": "cl1-prod-kv-rg"
         },
         "vaultName": {
-            "value": "szkchmzad2-kv"
+            "value": "cl1-prod-szkchm-we-kv"
         },
         "virtualNetworkName": {
             "value": "cl1-prod-szkchm-we-vnet"

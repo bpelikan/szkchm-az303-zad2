@@ -27,7 +27,7 @@ jobs:
         id: ARMValidate
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: szkchmzad2
+          resourceGroupName: cl1-prod-rg
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json # ${{ secrets.AZURE_ARM_PARAM_FILE }} # azuredeploy.parameters.json
           deploymentMode: Validate
@@ -38,7 +38,7 @@ jobs:
         id: ARMDeploy
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: szkchmzad2
+          resourceGroupName: cl1-prod-rg
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json # ${{ secrets.AZURE_ARM_PARAM_FILE }} # azuredeploy.parameters.json
           deploymentMode: Complete

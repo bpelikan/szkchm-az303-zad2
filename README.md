@@ -14,13 +14,13 @@ az ad sp create-for-rbac --name "szkchm-az303-zad2" --role contributor \
                           --sdk-auth
 
 # resource group for deployment
-RG_NAME="szkchmzad2"
+RG_NAME="cl1-prod-rg"
 LOCATION="westeurope"
 az group create --name $RG_NAME --location $LOCATION
 
 # create Key Vault for secrets
-RG_NAME_VAULT="mykv"
-VAULT_NAME="szkchmzad2-kv"
+RG_NAME_VAULT="cl1-prod-kv-rg"
+VAULT_NAME="cl1-prod-szkchm-we-kv"
 ADMIN_LOGIN="vmadminlogin$RANDOM"
 ADMIN_PASS="AdminPassword$RANDOM"
 az group create --name $RG_NAME_VAULT --location $LOCATION
