@@ -1,19 +1,46 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.7",
+  "contentVersion": "1.0.0.8",
   "parameters": {
+      "vaultSubscription": {
+        "type": "string",
+        "defaultValue": "[subscription().subscriptionId]",
+        "metadata": {
+          "description": "The name of the subscription that contains the keyvault."
+        }
+      },
+      "vaultResourceGroupName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of the resource group that contains the keyvault."
+        }
+      },
+      "vaultName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of the keyvault that contains the secret."
+        }
+      },
+      "vaultSecretAdminUsername": {
+        "type": "string",
+        "defaultValue": "vmAdminUsername",
+        "metadata": {
+          "description": "The name of the secret for admin username."
+        }
+      },
+      "vaultSecretAdminPassword": {
+        "type": "string",
+        "defaultValue": "vmAdminPassword",
+        "metadata": {
+          "description": "The name of the secret for admin password."
+        }
+      },
       "virtualNetworkName": {
           "type": "string",
           "defaultValue": "vnet"
       },
       "virtualMachineName": {
           "type": "string"
-      },
-      "adminUsername": {
-          "type": "secureString"
-      },
-      "adminPassword": {
-          "type": "secureString"
       },
       "networkSecurityGroupRules": {
           "type": "array"
@@ -35,7 +62,7 @@
         "mode": "Incremental",
         "templateLink": {
           "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
-          "contentVersion":"1.0.0.7"
+          "contentVersion":"1.0.0.8"
         },
         "parameters": {
             "virtualNetworkName":{
@@ -53,17 +80,27 @@
         "mode": "Incremental",
         "templateLink": {
           "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
-          "contentVersion":"1.0.0.7"
+          "contentVersion":"1.0.0.8"
         },
         "parameters": {
             "virtualMachineName":{
               "value": "[variables('virtualMachineName0')]"
             },
             "adminUsername":{
-              "value": "[parameters('adminUsername')]"
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminUsername')]"
+                }
             },
             "adminPassword":{
-              "value": "[parameters('adminPassword')]"
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminPassword')]"
+                }
             },
             "virtualNetworkName":{
               "value": "[parameters('virtualNetworkName')]"
@@ -86,17 +123,27 @@
         "mode": "Incremental",
         "templateLink": {
           "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
-          "contentVersion":"1.0.0.7"
+          "contentVersion":"1.0.0.8"
         },
         "parameters": {
             "virtualMachineName":{
               "value": "[variables('virtualMachineName1')]"
             },
             "adminUsername":{
-              "value": "[parameters('adminUsername')]"
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminUsername')]"
+                }
             },
             "adminPassword":{
-              "value": "[parameters('adminPassword')]"
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminPassword')]"
+                }
             },
             "virtualNetworkName":{
               "value": "[parameters('virtualNetworkName')]"

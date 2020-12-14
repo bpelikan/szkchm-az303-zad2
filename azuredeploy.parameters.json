@@ -1,18 +1,18 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.7",
+    "contentVersion": "1.0.0.8",
     "parameters": {
+        "vaultResourceGroupName": {
+            "value": "mykv"
+        },
+        "vaultName": {
+            "value": "szkchmzad2-kv"
+        },
         "virtualNetworkName": {
             "value": "cl1-prod-szkchm-we-vnet"
         },
         "virtualMachineName": {
             "value": "cl1-prod-szkchm-we-ubuntu-vm"
-        },
-        "adminUsername": {
-            "value": ""
-        },
-        "adminPassword": {
-            "value": ""
         },
         "networkSecurityGroupRules": {
             "value": [

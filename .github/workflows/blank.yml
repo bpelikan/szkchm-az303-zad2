@@ -29,7 +29,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: szkchmzad2
           template: azuredeploy.json
-          parameters: azuredeploy.parameters.json
+          parameters: azuredeploy.parameters.json # ${{ secrets.AZURE_ARM_PARAM_FILE }} # azuredeploy.parameters.json
           deploymentMode: Validate
 
       - name: Deploy Azure Resource Manager (ARM) Template
@@ -40,7 +40,7 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: szkchmzad2
           template: azuredeploy.json
-          parameters: ${{ secrets.AZURE_ARM_PARAM_FILE }} # azuredeploy.parameters.json
+          parameters: azuredeploy.parameters.json # ${{ secrets.AZURE_ARM_PARAM_FILE }} # azuredeploy.parameters.json
           deploymentMode: Complete
 
       - name: Deploy ARM output
