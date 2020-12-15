@@ -1,56 +1,161 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
+  "contentVersion": "1.0.0.9",
   "parameters": {
-      "location": {
+      "vaultSubscription": {
+        "type": "string",
+        "defaultValue": "[subscription().subscriptionId]",
+        "metadata": {
+          "description": "The name of the subscription that contains the keyvault."
+        }
+      },
+      "vaultResourceGroupName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of the resource group that contains the keyvault."
+        }
+      },
+      "vaultName": {
+        "type": "string",
+        "metadata": {
+          "description": "The name of the keyvault that contains the secret."
+        }
+      },
+      "vaultSecretAdminUsername": {
+        "type": "string",
+        "defaultValue": "vmAdminUsername",
+        "metadata": {
+          "description": "The name of the secret for admin username."
+        }
+      },
+      "vaultSecretAdminPassword": {
+        "type": "string",
+        "defaultValue": "vmAdminPassword",
+        "metadata": {
+          "description": "The name of the secret for admin password."
+        }
+      },
+      "virtualNetworkName": {
+          "type": "string",
+          "defaultValue": "vnet"
+      },
+      "virtualMachineName": {
           "type": "string"
       },
-      "accountType": {
-          "type": "string"
-      },
-      "kind": {
-          "type": "string"
-      },
-      "accessTier": {
-          "type": "string"
-      },
-      "minimumTlsVersion": {
-          "type": "string"
-      },
-      "supportsHttpsTrafficOnly": {
-          "type": "bool"
-      },
-      "allowBlobPublicAccess": {
-          "type": "bool"
+      "networkSecurityGroupRules": {
+          "type": "array"
       }
   },
   "variables": {
-    "storageAccountName": "[concat(uniqueString(subscription().subscriptionId), 'storage')]"
+    "virtualMachineName0": "[concat(parameters('virtualMachineName'), '0')]",
+    "virtualMachineName1": "[concat(parameters('virtualMachineName'), '1')]",
+    "vmSubnet0": "[concat(parameters('virtualNetworkName'), '-sub0')]",
+    "vmSubnet1": "[concat(parameters('virtualNetworkName'), '-sub1')]"
   },
   "resources": [
       {
-          "name": "[variables('storageAccountName')]",
-          "type": "Microsoft.Storage/storageAccounts",
-          "apiVersion": "2019-06-01",
-          "location": "[parameters('location')]",
-          "properties": {
-              "accessTier": "[parameters('accessTier')]",
-              "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
-              "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
-              "allowBlobPublicAccess": "[parameters('allowBlobPublicAccess')]"
-          },
-          "dependsOn": [],
-          "sku": {
-              "name": "[parameters('accountType')]"
-          },
-          "kind": "[parameters('kind')]",
-          "tags": {}
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "azuredeploy-vnet",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
+          "contentVersion":"1.0.0.9"
+        },
+        "parameters": {
+            "virtualNetworkName":{
+              "value": "[parameters('virtualNetworkName')]"
+            }
+          }
       }
-  ],
-  "outputs": {
-    "testoutput": {
-      "type": "string",
-      "value": "[variables('storageAccountName')]"
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "dependsOn": ["azuredeploy-vnet"],
+      "name": "azuredeploy-vm0",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
+          "contentVersion":"1.0.0.9"
+        },
+        "parameters": {
+            "virtualMachineName":{
+              "value": "[variables('virtualMachineName0')]"
+            },
+            "adminUsername":{
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminUsername')]"
+                }
+            },
+            "adminPassword":{
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminPassword')]"
+                }
+            },
+            "virtualNetworkName":{
+              "value": "[parameters('virtualNetworkName')]"
+            },
+            "vmSubnet":{
+              "value": "[variables('vmSubnet0')]"
+            },
+            "networkSecurityGroupRules":{
+              "value": "[parameters('networkSecurityGroupRules')]"
+            }
+          }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "dependsOn": ["azuredeploy-vnet"],
+      "name": "azuredeploy-vm1",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
+          "contentVersion":"1.0.0.9"
+        },
+        "parameters": {
+            "virtualMachineName":{
+              "value": "[variables('virtualMachineName1')]"
+            },
+            "adminUsername":{
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminUsername')]"
+                }
+            },
+            "adminPassword":{
+                "reference": {
+                    "keyVault": {
+                        "id": "[resourceId(parameters('vaultSubscription'), parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+                    },
+                    "secretName": "[parameters('vaultSecretAdminPassword')]"
+                }
+            },
+            "virtualNetworkName":{
+              "value": "[parameters('virtualNetworkName')]"
+            },
+            "vmSubnet":{
+              "value": "[variables('vmSubnet1')]"
+            },
+            "networkSecurityGroupRules":{
+              "value": "[parameters('networkSecurityGroupRules')]"
+            }
+          }
+      }
     }
-  }
+  ],
+  "outputs": {}
 }

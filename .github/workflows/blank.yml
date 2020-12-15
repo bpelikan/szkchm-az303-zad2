@@ -3,7 +3,8 @@ name: ARM template deploy
 on:
   push:
     branches: 
-      - '*'
+      - main
+      - vnet
   pull_request:
     branches: [ main ]
 
@@ -26,18 +27,18 @@ jobs:
         id: ARMValidate
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: szkchmzad2
+          resourceGroupName: cl1-prod-rg
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json
           deploymentMode: Validate
 
       - name: Deploy Azure Resource Manager (ARM) Template
-        if: github.ref == 'refs/heads/main'
+        # if: github.ref == 'refs/heads/main'
         uses: Azure/arm-deploy@v1
         id: ARMDeploy
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: szkchmzad2
+          resourceGroupName: cl1-prod-rg
           template: azuredeploy.json
           parameters: azuredeploy.parameters.json
           deploymentMode: Complete
