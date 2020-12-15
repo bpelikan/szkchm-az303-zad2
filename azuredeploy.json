@@ -47,7 +47,6 @@
       }
   },
   "variables": {
-    "storageAccountName": "[concat(uniqueString(subscription().subscriptionId), 'storage')]",
     "virtualMachineName0": "[concat(parameters('virtualMachineName'), '0')]",
     "virtualMachineName1": "[concat(parameters('virtualMachineName'), '1')]",
     "vmSubnet0": "[concat(parameters('virtualNetworkName'), '-sub0')]",
@@ -158,10 +157,5 @@
       }
     }
   ],
-  "outputs": {
-    "testoutput": {
-      "type": "string",
-      "value": "[variables('storageAccountName')]"
-    }
-  }
+  "outputs": {}
 }
