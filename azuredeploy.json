@@ -60,7 +60,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vnet.json",
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/main/vnet.json",
           "contentVersion":"1.0.0.9"
         },
         "parameters": {
@@ -78,7 +78,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/main/vm.json",
           "contentVersion":"1.0.0.9"
         },
         "parameters": {
@@ -121,7 +121,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/vnet/vm.json",
+          "uri":"https://raw.githubusercontent.com/bpelikan/szkchm-az303-zad2/main/vm.json",
           "contentVersion":"1.0.0.9"
         },
         "parameters": {
