@@ -2,6 +2,11 @@
 
 ![ARM template deploy](https://github.com/bpelikan/szkchm-az303-zad2/workflows/ARM%20template%20deploy/badge.svg)
 
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbpelikan%2Fszkchm-az303-zad2%2Fmain%2Fazuredeploy.json" target="_blank">
+  <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true"/>
+</a>
+
 ![Screen](./img/20201216212102.jpg "Screen")
 
 ### 1. Create Resource Group
