@@ -2,6 +2,7 @@
 
 ![ARM template deploy](https://github.com/bpelikan/szkchm-az303-zad2/workflows/ARM%20template%20deploy/badge.svg)
 
+![Screen](./img/20201216212102.jpg "Screen")
 
 ## GitHub Actions configuration
 ```bash
