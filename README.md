@@ -1,4 +1,4 @@
-# szkchm-az303-zad2
+# [szkchm-az303-zad2](https://github.com/bpelikan/SzkolaChmury/tree/az303/zadanie2/Azure/Architecture/Az-303/Zadanie3)
 
 ![ARM template deploy](https://github.com/bpelikan/szkchm-az303-zad2/workflows/ARM%20template%20deploy/badge.svg)
 
